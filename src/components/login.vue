@@ -2,13 +2,13 @@
   <div class="login">
     <div class="panel">
       <h2><Avatar src="/static/img/java.jpg" size="large" /></h2>
-      <Input v-model="username" placeholder="用户名" style="width: 402px;" size="large">
+      <Input v-model="username" placeholder="用户名" style="width: 402px;" size="large"  @on-enter="login">
       </Input>
       <Input type="password" v-model="password" placeholder="密码"
-             style="margin-top: 20px;width: 402px" size="large">
+             style="margin-top: 20px;width: 402px" size="large" @on-enter="login">
       </Input>
       <Button class="loginBtn" type="primary" :loading="loading" shape="circle" size="large" @click="login"
-              style="width: 400px;height: 48px;margin-top: 30px;">
+              style="width: 400px;height: 48px;margin-top: 30px;background-color: #495060;border-color:#495060">
         <span v-if="!loading">登录</span>
       </Button>
     </div>
