@@ -77,6 +77,8 @@
         if (id && id !== 0) {
           this.form.id = id
           this.getStudentWork()
+        } else {
+          this.form.id = 0
         }
       },
       submit: function () {

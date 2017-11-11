@@ -18,6 +18,16 @@
       <Button type="primary" @click="showEdit()">新增学生作品</Button>
     </div>
     <Edit ref="edit" @update="listStudentWork"></Edit>
+
+    <Modal
+      v-model="listAttachmentVisible"
+      title="附件列表"
+      width="800"
+      :footerHide="true"
+      :transfer=transfer
+    >
+      <ListAttachment ref="listAttachment"></ListAttachment>
+    </Modal>
   </div>
 
 </template>
@@ -25,6 +35,7 @@
 <script>
   import qs from 'qs'
   import Edit from './edit.vue'
+  import ListAttachment from '../attachment/list.vue'
 
   export default {
     name: 'studentWorkList',
@@ -32,7 +43,8 @@
       this.listStudentWork(1)
     },
     components: {
-      Edit
+      Edit,
+      ListAttachment
     },
     data () {
       return {
@@ -41,6 +53,7 @@
         per: 10,
         page: 1,
         loading: false,
+        listAttachmentVisible: false,
         columns: [
           {
             title: '#',
@@ -70,6 +83,22 @@
               } else if (params.row.category === 3) {
                 return '大赛作品'
               }
+            }
+          },
+          {
+            title: '附件',
+            render: (h, params) => {
+              return h('Button', {
+                props: {
+                  type: 'primary',
+                  size: 'small'
+                },
+                on: {
+                  click: () => {
+                    this.showListAttachment(params.row.id)
+                  }
+                }
+              }, '查看')
             }
           },
           {
@@ -158,6 +187,10 @@
             })
           }
         })
+      },
+      showListAttachment (id) {
+        this.listAttachmentVisible = true
+        this.$refs.listAttachment.listAttachment(id, 3)
       },
       showEdit (id) {
         this.$refs.edit.show(id)
