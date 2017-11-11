@@ -17,9 +17,7 @@
       </Form-item>
     </Form>
   </Modal>
-
 </template>
-
 <script>
   import qs from 'qs'
 
@@ -47,10 +45,11 @@
         if (topicId && topicId !== 0) {
           this.form.topicId = topicId
         }
-
         if (id && id !== 0) {
           this.form.id = id
           this.getKnowledge()
+        } else {
+          this.form.id = 0
         }
       },
       submit: function () {
