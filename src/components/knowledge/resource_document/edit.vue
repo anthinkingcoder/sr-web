@@ -3,6 +3,7 @@
     v-model="visible"
     :title="title"
     width="1000"
+    :footerHide="true"
     :transfer=transfer>
     <Form :model="form" :label-width="80" style="margin-top: 20px">
       <Form-item label="文档内容">
@@ -72,6 +73,8 @@
         this.visible = true
         if (id && id !== 0) {
           this.getDocument()
+        } else {
+          this.form.content = ''
         }
       },
       getDocument: function () {
