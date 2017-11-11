@@ -60,6 +60,8 @@
         this.visible = true
         if (id && id !== 0) {
           this.getExpandKnowledge()
+        } else {
+          this.form.id = 0
         }
       },
       submit: function () {
