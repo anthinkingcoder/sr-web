@@ -62,6 +62,10 @@
             key: 'name'
           },
           {
+            title: '类别',
+            key: 'categoryId'
+          },
+          {
             title: '上传者',
             key: 'uploaderId'
           },
