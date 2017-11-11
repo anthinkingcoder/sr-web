@@ -4,6 +4,7 @@ import Main from '../components/index.vue'
 import Login from '../components/login.vue'
 import Knowledge from '../components/knowledge/list.vue'
 import Topic from '../components/topic/list.vue'
+import TopicCategory from '../components/topic/category/list.vue'
 import ExpandKnowledge from '../components/expand_knowledge/list.vue'
 import Example from '../components/example/list.vue'
 import StudentWork from '../components/student_work/list.vue'
@@ -27,6 +28,10 @@ export default new Router({
         {
           path: '/admin/main/topic/list',
           component: Topic
+        },
+        {
+          path: '/admin/main/topic/category/list',
+          component: TopicCategory
         },
         {
           path: '/admin/main/expand_knowledge/list',

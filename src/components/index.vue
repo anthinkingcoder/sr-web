@@ -103,14 +103,26 @@
               </Menu-item>
             </Submenu>
 
+            <Submenu name="3" >
+              <template slot="title">
+                <Icon type="ios-nutrition"></Icon>
+                <span class="layout-text">专题管理</span>
+              </template>
+                <Menu-item name="3-1" class="layout-text">
+                  <Icon type="ios-nutrition"></Icon>
+                  <span class="layout-text">进阶专题管理</span>
+                </Menu-item>
+              <Menu-item name="3-2" class="layout-text" v-show="systemVisible">
+                <Icon type="ios-nutrition"></Icon>
+                <span class="layout-text">专题类别管理</span>
+              </Menu-item>
+            </Submenu>
             <Menu-item name="2-1" class="layout-text">
               <Icon type="ios-keypad"></Icon>
               <span class="layout-text">基础知识管理</span>
             </Menu-item>
-            <Menu-item name="3-1" class="layout-text">
-              <Icon type="ios-nutrition"></Icon>
-              <span class="layout-text">进阶专题管理</span>
-            </Menu-item>
+
+
 
             <Menu-item name="4-1" class="layout-text">
               <Icon type="network"></Icon>
@@ -193,6 +205,10 @@
           },
           '3-1': {
             path: '/admin/main/topic/list',
+            title: '专题列表'
+          },
+          '3-2': {
+            path: '/admin/main/topic/category/list',
             title: '专题列表'
           },
           '4-1': {

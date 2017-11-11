@@ -9,7 +9,6 @@ import iView from 'iview'
 import moment from 'moment'
 import vueMoment from 'vue-moment'
 import 'iview/dist/styles/iview.css'
-import '../my-theme/index.less'
 window.moment = moment
 Vue.config.productionTip = false
 Vue.use(VueAxios, axios)
