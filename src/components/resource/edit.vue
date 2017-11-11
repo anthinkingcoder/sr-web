@@ -101,6 +101,8 @@
         if (id && id !== 0) {
           this.form.id = id
           this.getResource()
+        } else {
+          this.form.id = 0
         }
       },
       submit: function () {
