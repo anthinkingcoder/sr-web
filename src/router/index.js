@@ -11,6 +11,8 @@ import StudentWork from '../components/student_work/list.vue'
 import Resource from '../components/resource/list.vue'
 import Teacher from '../components/teacher/list.vue'
 import Web from '../components/web.vue'
+import QuestionCategory from '../components/test/cateogry/list.vue'
+import Question from '../components/test/question/list.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -44,6 +46,14 @@ export default new Router({
         {
           path: '/admin/main/student_work/list',
           component: StudentWork
+        },
+        {
+          path: '/admin/main/question/category/list',
+          component: QuestionCategory
+        },
+        {
+          path: '/admin/main/question/list',
+          component: Question
         },
         {
           path: '/admin/main/resource/list',

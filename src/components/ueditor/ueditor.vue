@@ -8,7 +8,7 @@
   export default {
     data() {
       return {
-        id: 'marketform' + (new Date() - 0)
+        id: 'marketform' + (new Date() - 0) + Math.random() * 100
       }
     },
     props: {

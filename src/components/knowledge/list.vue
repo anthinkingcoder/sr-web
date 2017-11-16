@@ -27,6 +27,18 @@
       >
         <ListAttachment ref="listAttachment"></ListAttachment>
       </Modal>
+      <Modal
+        v-model="listExampleVisible"
+        title="实例教程列表"
+        width="800"
+        :footerHide="true"
+        :transfer=transfer
+      >
+        <ListExample ref="listExample"></ListExample>
+
+      </Modal>
+
+
     </div>
 
   </div>
@@ -38,6 +50,7 @@
   import Edit from './edit.vue'
   import ResourceDocumentEdit from './resource_document/edit.vue'
   import ListAttachment from '../attachment/list.vue'
+  import ListExample from '../example/list.vue'
 
   export default {
     name: 'knowledgeList',
@@ -49,7 +62,8 @@
     components: {
       Edit,
       ResourceDocumentEdit,
-      ListAttachment
+      ListAttachment,
+      ListExample
     },
     props: {
       isFirstLoad: Boolean,
@@ -65,6 +79,7 @@
         topicId: 0,
         name: '新增基础知识',
         listAttachmentVisible: false,
+        listExampleVisible: false,
         transfer: false,
         columns: [
           {
@@ -115,6 +130,22 @@
                 on: {
                   click: () => {
                     this.showListAttachment(params.row.id)
+                  }
+                }
+              }, '查看')
+            }
+          },
+          {
+            title: '实例教程',
+            render: (h, params) => {
+              return h('Button', {
+                props: {
+                  type: 'primary',
+                  size: 'small'
+                },
+                on: {
+                  click: () => {
+                    this.showListExample(params.row.id)
                   }
                 }
               }, '查看')
@@ -248,6 +279,10 @@
       },
       showResourceDocumentEdit (knowledgeId, resourceDocumentId) {
         this.$refs.resourceDocumentEdit.show(knowledgeId, resourceDocumentId)
+      },
+      showListExample (knowledgeId, topicId) {
+        this.listExampleVisible = true
+        this.$refs.listExample.show(knowledgeId, topicId)
       },
       showListAttachment (id) {
         this.listAttachmentVisible = true

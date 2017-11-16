@@ -2,7 +2,7 @@
   <Modal
     v-model="visible"
     title="拓展知识"
-    width="600"
+    width="800"
     :footerHide="true"
     :transfer=transfer>
     <div style="margin-top: 30px"></div>
@@ -27,6 +27,9 @@
       <Form-item label="摘要">
         <Input v-model="form.summary" type="textarea" size="large" :maxlength="255" placeholder="请输入摘要,最大255个字"/>
       </Form-item>
+      <Form-item label="文档内容">
+        <ueditor :value="this.form.content" :config="config" ref="ueditor"></ueditor>
+      </Form-item>
       <Form-item label="原地址">
         <Input v-model="form.url"/>
       </Form-item>
@@ -39,8 +42,12 @@
 
 <script>
   import qs from 'qs'
+  import ueditor from '../../components/ueditor/ueditor.vue'
 
   export default {
+    components: {
+      ueditor
+    },
     data () {
       return {
         form: {
@@ -48,10 +55,15 @@
           url: '',
           summary: '',
           id: 0,
-          coverUrl: ''
+          coverUrl: '',
+          content: ''
         },
         visible: false,
-        transfer: false
+        transfer: false,
+        config: {
+          initialFrameWidth: null,
+          initialFrameHeight: 320
+        }
       }
     },
     methods: {
@@ -65,6 +77,7 @@
         }
       },
       submit: function () {
+        this.form.content = this.$refs.ueditor.getContent()
         if (!this.form.url) {
           this.$Message.error('附件下载地址不存在')
           return
@@ -77,7 +90,8 @@
           name: this.form.name,
           url: this.form.url,
           coverUrl: this.form.coverUrl,
-          summary: this.form.summary
+          summary: this.form.summary,
+          content: this.form.content
         })).then((response) => {
           this.loading = false
           let result = response.data
@@ -107,7 +121,8 @@
               url: data.url,
               summary: data.summary,
               name: data.name,
-              coverUrl: data.coverUrl
+              coverUrl: data.coverUrl,
+              content: data.content
             }
           } else {
             this.$Message.error(data.errorMsg)

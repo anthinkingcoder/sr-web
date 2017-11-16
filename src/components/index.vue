@@ -103,15 +103,15 @@
               </Menu-item>
             </Submenu>
 
-            <Submenu name="3" >
+            <Submenu name="3">
               <template slot="title">
                 <Icon type="ios-nutrition"></Icon>
                 <span class="layout-text">专题管理</span>
               </template>
-                <Menu-item name="3-1" class="layout-text">
-                  <Icon type="ios-nutrition"></Icon>
-                  <span class="layout-text">进阶专题管理</span>
-                </Menu-item>
+              <Menu-item name="3-1" class="layout-text">
+                <Icon type="ios-nutrition"></Icon>
+                <span class="layout-text">进阶专题管理</span>
+              </Menu-item>
               <Menu-item name="3-2" class="layout-text" v-show="systemVisible">
                 <Icon type="ios-nutrition"></Icon>
                 <span class="layout-text">专题类别管理</span>
@@ -123,17 +123,10 @@
             </Menu-item>
 
 
-
             <Menu-item name="4-1" class="layout-text">
               <Icon type="network"></Icon>
               <span class="layout-text">拓展知识管理</span>
             </Menu-item>
-
-            <Menu-item name="5-1" class="layout-text">
-              <Icon type="ios-analytics"></Icon>
-              <span class="layout-text">实例教程管理</span>
-            </Menu-item>
-
 
             <Menu-item name="6-1" class="layout-text">
               <Icon type="ios-color-filter"></Icon>
@@ -147,11 +140,15 @@
               </template>
               <Menu-item name="7-1" class="layout-text">
                 <Icon type="ios-information"></Icon>
-                <span class="layout-text">题库</span>
+                <span class="layout-text">题目类别管理</span>
               </Menu-item>
               <Menu-item name="7-2" class="layout-text">
+                <Icon type="ios-information"></Icon>
+                <span class="layout-text">题库管理</span>
+              </Menu-item>
+              <Menu-item name="7-3" class="layout-text">
                 <Icon type="record"></Icon>
-                <span class="layout-text">测试记录</span>
+                <span class="layout-text">测试记录管理</span>
               </Menu-item>
             </Submenu>
 
@@ -222,6 +219,14 @@
           '6-1': {
             path: '/admin/main/student_work/list',
             title: '学生作品'
+          },
+          '7-1': {
+            path: '/admin/main/question/category/list',
+            title: '题目类别管理'
+          },
+          '7-2': {
+            path: '/admin/main/question/list',
+            title: '题目管理'
           },
           '8-1': {
             path: '/admin/main/resource/list',

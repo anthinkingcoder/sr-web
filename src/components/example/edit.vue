@@ -9,24 +9,17 @@
         <Input v-model="form.title" type="textarea" placeholder="请输入实例题目"/>
       </Form-item>
       <Form-item label="实例内容">
-        <ueditor :value="form.content" :config="config" ref="contentUeditor"></ueditor>
+        <ueditor :value="form.content" :config="config" ref="contentUeditor" id="contentUeditor"></ueditor>
       </Form-item>
       <Form-item label="实例讲解">
-        <ueditor :value="form.explain" :config="config" ref="explainUeditor"></ueditor>
+        <ueditor :value="form.explain" :config="config" ref="explainUeditor" id="explainUeditor"></ueditor>
       </Form-item>
       <Form-item label="运行结果">
-        <ueditor :value="form.result" :config="config" ref="resultUeditor"></ueditor>
+        <ueditor :value="form.result" :config="config" ref="resultUeditor" id="resultUeditor"></ueditor>
       </Form-item>
-      <Form-item label="所属专题">
-        <Select v-model="form.topicId" filterable :transfer="true" @on-change="topicSelectChange" :clearable="true">
-          <Option v-for="item in topicList" :value="item.id" :key="item.id">{{ item.name }}</Option>
-        </Select>
-      </Form-item>
-      <Form-item label="所属知识点">
-        <Select v-model="form.knowledgeId" filterable :transfer="true">
-          <Option v-for="item in knowledgeList" :value="item.id" :key="item.id">{{ item.name}}</Option>
-        </Select>
-      </Form-item>
+       <Form-item label="难易程度">
+         <Rate v-model="form.level"></Rate>
+       </Form-item>
       <Form-item>
         <Button type="primary" :loading="loading" @click="submit">提交</Button>
       </Form-item>
@@ -55,7 +48,8 @@
           content: '',
           result: '',
           explain: '',
-          title: ''
+          title: '',
+          level: 1
         },
         transfer: false,
         visible: false,
@@ -130,8 +124,8 @@
           explain: this.form.explain,
           id: this.form.id,
           result: this.form.result,
-          topicId: this.form.topicId,
-          knowledgeId: this.form.knowledgeId
+          knowledgeId: this.form.knowledgeId,
+          level: this.form.level
         })).then((response) => {
           this.loading = false
           let result = response.data
@@ -173,7 +167,8 @@
               topicId: this.form.topicId,
               explain: data.exampleExplain,
               result: data.runtimeResult,
-              title: data.title
+              title: data.title,
+              level: data.level
             }
           } else {
             this.$Message.error(data.errorMsg)

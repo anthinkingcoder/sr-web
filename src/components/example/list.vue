@@ -88,41 +88,51 @@
             }
           },
           {
-            title: '所属专题',
-            key: 'topicId',
-            render: (h, params) => {
-              return h('a', {
-                on: {
-                  click: () => {
-                    if (params.row.topicId && params.row.topicId !== 0) {
-                      this.$refs.topicEdit.show(params.row.topicId)
-                    }
-                  }
+            title: '难易等级',
+            key: 'level',
+            sortable: true,
+            width: 200,
+            render: (h, param) => {
+              return h('Rate', {
+                props: {
+                  disabled: 'disabled',
+                  value: param.row.level
                 }
-              }, params.row.knowledgeId)
+              })
             }
           },
-          {
-            title: '上传者',
-            key: 'uploaderId'
-          },
-          {
-            title: '所属知识点编号',
-            key: 'knowledgeId',
-            render: (h, params) => {
-              return h('a', {
-                on: {
-                  click: () => {
-                    if (params.row.topicId && params.row.topicId !== 0) {
-                      this.showKnowledgeEdit('进阶知识', 2, params.row.knowledgeId, params.row.topicId)
-                    } else {
-                      this.showKnowledgeEdit('进阶知识', 1, params.row.knowledgeId, params.row.topicId)
-                    }
-                  }
-                }
-              }, params.row.knowledgeId)
-            }
-          },
+//          {
+//            title: '专题',
+//            key: 'topicId',
+//            render: (h, params) => {
+//              return h('a', {
+//                on: {
+//                  click: () => {
+//                    if (params.row.topicId && params.row.topicId !== 0) {
+//                      this.$refs.topicEdit.show(params.row.topicId)
+//                    }
+//                  }
+//                }
+//              }, params.row.knowledgeId)
+//            }
+//          },
+//          {
+//            title: '知识点编号',
+//            key: 'knowledgeId',
+//            render: (h, params) => {
+//              return h('a', {
+//                on: {
+//                  click: () => {
+//                    if (params.row.topicId && params.row.topicId !== 0) {
+//                      this.showKnowledgeEdit('进阶知识', 2, params.row.knowledgeId, params.row.topicId)
+//                    } else {
+//                      this.showKnowledgeEdit('进阶知识', 1, params.row.knowledgeId, params.row.topicId)
+//                    }
+//                  }
+//                }
+//              }, params.row.knowledgeId)
+//            }
+//          },
           {
             title: '附件',
             render: (h, params) => {
@@ -184,7 +194,8 @@
         this.$http.get('/api/admin/example/list', {
           params: {
             size: this.per,
-            page: this.page
+            page: this.page,
+            knowledgeId: this.knowledgeId
           }
         }).then((response) => {
           this.loading = false
@@ -192,31 +203,6 @@
           let data = result.data
           if (result.code === 666) {
             this.examples = data.content
-            this.total = data.totalElements
-            this.page = data.number + 1
-          } else {
-            this.$Message.error('服务器错误,请重试')
-          }
-        }).catch(() => {
-          this.loading = false
-          this.$Message.error('服务器错误,请重试')
-        })
-      },
-      listTopicKnowledge (page) {
-        this.page = page - 1
-        this.loading = true
-        this.$http.get('/api/admin/knowledge/topic/list', {
-          params: {
-            size: this.per,
-            page: this.page,
-            topicId: this.topicId
-          }
-        }).then((response) => {
-          this.loading = false
-          let result = response.data
-          let data = result.data
-          if (result.code === 666) {
-            this.files = data.content
             this.total = data.totalElements
             this.page = data.number + 1
           } else {
@@ -250,8 +236,8 @@
           }
         })
       },
-      showEdit (knowledgeId, topicId, id) {
-        this.$refs.edit.show(knowledgeId, topicId, id)
+      showEdit (id) {
+        this.$refs.edit.show(this.knowledgeId, this.knowledgeId, id)
       },
       showResourceDocumentEdit (knowledgeId, resourceDocumentId) {
         this.$refs.resourceDocumentEdit.show(knowledgeId, resourceDocumentId)
@@ -263,14 +249,10 @@
         this.listAttachmentVisible = true
         this.$refs.listAttachment.listAttachment(id, 2)
       },
-      show (topicId, name) {
-        this.name = name
+      show (knowledgeId, topicId) {
+        this.knowledgeId = knowledgeId
         this.topicId = topicId
-        if (!this.topicId || this.topicId === 0) {
-          this.listKnowledge(1)
-        } else {
-          this.listTopicKnowledge(1)
-        }
+        this.listExample(1)
       }
     }
   }
