@@ -4,11 +4,11 @@
     :title="title"
     :footerHide="true">
     <Form :model="form" :label-width="80" style="margin-top: 20px">
-      <Form-item label="专题名称">
+      <Form-item label="专题类别">
         <Input v-model="form.name" placeholder="请输入类别名称"/>
       </Form-item>
-      <Form-item label="专题简介">
-        <Input v-model="form.summary" type="textarea" placeholder="请输入类别名称"/>
+      <Form-item label="简介">
+        <Input v-model="form.summary" type="textarea" placeholder="请输入专题简介"/>
       </Form-item>
       <Form-item label="排序">
         <InputNumber :min="0" v-model="form.sort"></InputNumber>
@@ -41,6 +41,8 @@
       show: function (id) {
         this.visible = true
         this.form.id = id
+        this.form.summary = ''
+        this.form.sort = 0
         if (id && id !== 0) {
           this.getCategory()
         }

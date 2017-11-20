@@ -1,8 +1,6 @@
 <style scoped>
 
-  .ivu-menu-dark {
-    background-color: #ffffff !important;
-  }
+
 
   .layout {
     border: 1px solid #d7dde4;
@@ -26,10 +24,25 @@
     margin: 0 auto;
   }
 
+  .layout-menu-left{
+    background: #464c5b;
+  }
+
   .layout-assistant {
     width: 300px;
     margin: 0 auto;
     height: inherit;
+  }
+
+  .layout-logo-left{
+    width: 90%;
+    height: 30px;
+    /*background: #5b6270;*/
+    color: #fff;
+    border-radius: 3px;
+    margin: 15px auto;
+    text-align: center;
+    vertical-align: middle;
   }
 
   .logout {
@@ -63,113 +76,118 @@
     padding: 10px 0 20px;
     color: #9ea7b4;
   }
+  .ivu-col{
+    transition: width .2s ease-in-out;
+  }
 </style>
 <template>
   <div class="layout" :class="{'layout-hide-text': spanLeft < 5}">
-    <Menu mode="horizontal" theme="dark" :active-name="1">
-      <div class="layout-logo">
-        <Row>
-          <Col span="1">
-          1</Col>
-          <Col span="4">
-          <img src="/static/img/java.jpg" height="50px"></Col>
-        </Row>
-      </div>
-      <div class="logout">
-
-        <Dropdown @on-click="logout">
-          <a>
-            {{username}}
-            <Icon type="arrow-down-b"></Icon>
-          </a>
-          <Dropdown-menu slot="list">
-            <Dropdown-item>注销</Dropdown-item>
-          </Dropdown-menu>
-        </Dropdown>
-      </div>
-    </Menu>
-    <div class="layout-content">
-      <Row type="flex">
-        <i-col :span="spanLeft">
-          <Menu @on-select="menuSelect" :active-name="active" width="auto" :open-names="[]">
-            <Submenu name="1" v-show="systemVisible">
-              <template slot="title">
-                <Icon type="ios-locked"></Icon>
-                <span class="layout-text">系统管理</span>
-              </template>
-              <Menu-item name="1-1" class="layout-text">
-                <Icon type="person"></Icon>
-                <span class="layout-text">教师管理</span>
-              </Menu-item>
-            </Submenu>
-
-            <Submenu name="3">
-              <template slot="title">
-                <Icon type="ios-nutrition"></Icon>
-                <span class="layout-text">专题管理</span>
-              </template>
-              <Menu-item name="3-1" class="layout-text">
-                <Icon type="ios-nutrition"></Icon>
-                <span class="layout-text">进阶专题管理</span>
-              </Menu-item>
-              <Menu-item name="3-2" class="layout-text" v-show="systemVisible">
-                <Icon type="ios-nutrition"></Icon>
-                <span class="layout-text">专题类别管理</span>
-              </Menu-item>
-            </Submenu>
-            <Menu-item name="2-1" class="layout-text">
-              <Icon type="ios-keypad"></Icon>
-              <span class="layout-text">基础知识管理</span>
-            </Menu-item>
-
-
-            <Menu-item name="4-1" class="layout-text">
-              <Icon type="network"></Icon>
-              <span class="layout-text">拓展知识管理</span>
-            </Menu-item>
-
-            <Menu-item name="6-1" class="layout-text">
-              <Icon type="ios-color-filter"></Icon>
-              <span class="layout-text">学生作品管理</span>
-            </Menu-item>
-
-            <Submenu name="7">
-              <template slot="title">
-                <Icon type="social-codepen"></Icon>
-                <span class="layout-text">在线测试管理</span>
-              </template>
-              <Menu-item name="7-1" class="layout-text">
-                <Icon type="ios-information"></Icon>
-                <span class="layout-text">题目类别管理</span>
-              </Menu-item>
-              <Menu-item name="7-2" class="layout-text">
-                <Icon type="ios-information"></Icon>
-                <span class="layout-text">题库管理</span>
-              </Menu-item>
-              <Menu-item name="7-3" class="layout-text">
-                <Icon type="record"></Icon>
-                <span class="layout-text">测试记录管理</span>
-              </Menu-item>
-            </Submenu>
-
-            <Menu-item name="8-1" class="layout-text">
-              <Icon type="ios-cloud-download"></Icon>
-              <span class="layout-text">相关资源管理</span>
-            </Menu-item>
-
-          </Menu>
-        </i-col>
-        <i-col :span="spanRight">
-
-          <div class="layout-content-main">
-            <router-view></router-view>
+    <Row type="flex">
+      <Col :span="spanLeft" class="layout-menu-left">
+        <Menu @on-select="menuSelect" :active-name="active" width="auto" :open-names="['1','3','7']"  theme="dark">
+          <div class="layout-logo-left">
+              <h3 style="padding-top: 5px">Java学习网后台</h3>
           </div>
-        </i-col>
-      </Row>
-    </div>
-    <div class="layout-copy">
-      2017 &copy; 长沙学院
-    </div>
+          <Submenu name="1" v-show="systemVisible" theme="dark">
+            <template slot="title">
+              <Icon type="ios-locked"></Icon>
+              <span class="layout-text">系统管理</span>
+            </template>
+            <Menu-item name="1-1" class="layout-text">
+              <Icon type="person"></Icon>
+              <span class="layout-text">教师管理</span>
+            </Menu-item>
+          </Submenu>
+
+          <Submenu name="3">
+            <template slot="title">
+              <Icon type="ios-nutrition"></Icon>
+              <span class="layout-text">专题管理</span>
+            </template>
+            <Menu-item name="3-1" class="layout-text">
+              <Icon type="ios-nutrition"></Icon>
+              <span class="layout-text">进阶专题管理</span>
+            </Menu-item>
+            <Menu-item name="3-2" class="layout-text" v-show="systemVisible">
+              <Icon type="ios-nutrition"></Icon>
+              <span class="layout-text">专题类别管理</span>
+            </Menu-item>
+          </Submenu>
+          <Menu-item name="2-1" class="layout-text">
+            <Icon type="ios-keypad"></Icon>
+            <span class="layout-text">基础知识管理</span>
+          </Menu-item>
+
+
+          <Menu-item name="4-1" class="layout-text">
+            <Icon type="network"></Icon>
+            <span class="layout-text">拓展知识管理</span>
+          </Menu-item>
+
+          <Menu-item name="6-1" class="layout-text">
+            <Icon type="ios-color-filter"></Icon>
+            <span class="layout-text">学生作品管理</span>
+          </Menu-item>
+
+          <Submenu name="7">
+            <template slot="title">
+              <Icon type="social-codepen"></Icon>
+              <span class="layout-text">在线测试管理</span>
+            </template>
+            <Menu-item name="7-1" class="layout-text">
+              <Icon type="ios-information"></Icon>
+              <span class="layout-text">题目类别管理</span>
+            </Menu-item>
+            <Menu-item name="7-2" class="layout-text">
+              <Icon type="ios-information"></Icon>
+              <span class="layout-text">题库管理</span>
+            </Menu-item>
+          </Submenu>
+
+          <Menu-item name="8-1" class="layout-text">
+            <Icon type="ios-cloud-download"></Icon>
+            <span class="layout-text">相关资源管理</span>
+          </Menu-item>
+        </Menu>
+      </Col>
+      <Col :span="spanRight">
+      <Menu mode="horizontal" :active-name="1">
+        <div class="layout-logo">
+          <Row>
+            <Col span="1">
+              <!--<Button type="text" @click="toggleClick">-->
+                <!--<Icon type="navicon" size="32"></Icon>-->
+              <!--</Button>-->
+            </Col>
+            <Col span="4">
+            <img src="/static/img/java.jpg" height="50px">
+            </Col>
+          </Row>
+        </div>
+        <div class="logout">
+
+          <Dropdown @on-click="logout">
+            <a>
+              {{username}}
+              <Icon type="arrow-down-b"></Icon>
+            </a>
+            <Dropdown-menu slot="list">
+              <Dropdown-item>注销</Dropdown-item>
+            </Dropdown-menu>
+          </Dropdown>
+        </div>
+      </Menu>
+      <div class="layout-content">
+            <div class="layout-content-main">
+              <router-view></router-view>
+            </div>
+      </div>
+      <div class="layout-copy">
+        2017 &copy; 长沙学院
+      </div>
+      </Col>
+    </Row>
+
     <Modal v-model="loading" width="200" :closable="false" :footerHide="true" :mask-closable="false">
       <Spin size="large">
         <Icon type="load-c" :size="36" class="spin-icon-load"></Icon>
@@ -235,7 +253,21 @@
         }
       }
     },
+    computed: {
+      iconSize () {
+        return this.spanLeft === 5 ? 14 : 24
+      }
+    },
     methods: {
+      toggleClick () {
+        if (this.spanLeft === 5) {
+          this.spanLeft = 2
+          this.spanRight = 22
+        } else {
+          this.spanLeft = 5
+          this.spanRight = 19
+        }
+      },
       menuSelect (name) {
         this.$router.push({
           path: this.nav['' + name + ''].path

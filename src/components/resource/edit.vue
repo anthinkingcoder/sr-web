@@ -98,6 +98,10 @@
     methods: {
       show: function (id) {
         this.visible = true
+        this.form.summary = ''
+        this.form.name = ''
+        this.form.coverUrl = ''
+        this.form.categoryId = 0
         if (id && id !== 0) {
           this.form.id = id
           this.getResource()

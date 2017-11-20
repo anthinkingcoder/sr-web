@@ -83,8 +83,8 @@
         })
       },
       listKnowledge (topicId) {
-        var url = ''
-        var params = {}
+        let url = ''
+        let params = {}
         if (topicId && topicId !== 0) {
           url = '/api/admin/knowledge/topic/all'
           params = {
@@ -146,6 +146,9 @@
         this.form.knowledgeId = knowledgeId
         this.form.topicId = topicId
         this.visible = true
+        this.form.content = ''
+        this.form.title = ''
+        this.form.explain = ''
         if (id && id !== 0) {
           this.getExample()
         }

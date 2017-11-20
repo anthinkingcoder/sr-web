@@ -65,7 +65,6 @@
           <Option v-for="item in categories" :value="item.id" :key="item.id">{{ item.name }}</Option>
         </Select>
       </Form-item>
-
       <Form-item>
         <Button type="primary" :loading="loading" @click="submit">提交</Button>
       </Form-item>
@@ -251,7 +250,6 @@
           let data = result.data
           if (result.code === 666) {
             this.categories = data
-            console.info(this.categories)
           } else {
             this.$Message.error(data.errorMsg)
           }

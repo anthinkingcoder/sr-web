@@ -172,7 +172,7 @@
               let data = result.data
               if (result.code === 666) {
                 this.$Message.success('删除成功')
-                this.listTopicCategory()
+                this.listQuestion(1)
               } else {
                 this.$Message.error(data.message)
               }

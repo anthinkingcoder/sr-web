@@ -31,7 +31,7 @@
 
   export default {
     created () {
-      this.listRootCategories()
+
     },
     data () {
       return {
@@ -56,6 +56,7 @@
         this.form.summary = ''
         this.form.name = ''
         this.form.sort = 0
+        this.listRootCategories()
         if (id && id !== 0) {
           this.getCategory()
         } else {

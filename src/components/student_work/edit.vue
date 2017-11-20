@@ -74,6 +74,12 @@
     methods: {
       show: function (id) {
         this.visible = true
+        this.form.title = ''
+        this.form.author = ''
+        this.form.summary = ''
+        this.form.content = ''
+        this.form.category = 0
+        this.form.id = ''
         if (id && id !== 0) {
           this.form.id = id
           this.getStudentWork()

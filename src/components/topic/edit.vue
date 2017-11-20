@@ -43,7 +43,8 @@
         form: {
           name: '',
           id: 0,
-          coverUrl: ''
+          coverUrl: '',
+          categoryId: 0
         },
         visible: false,
         loading: false,
@@ -54,6 +55,7 @@
     methods: {
       show: function (id) {
         this.visible = true
+        this.form.coverUrl = ''
         if (id && id !== 0) {
           this.form.id = id
           this.getTopic()
@@ -96,7 +98,8 @@
           if (result.code === 666) {
             this.form = {
               id: data.id,
-              name: data.name
+              name: data.name,
+              categoryId: data.categoryId
             }
           } else {
             this.$Message.error(data.errorMsg)
