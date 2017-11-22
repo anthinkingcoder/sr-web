@@ -14,6 +14,9 @@
           multiple
           action="//127.0.0.1:8088/upload/"
           :on-success="handleCoverSuccess"
+          :format="['jpg','jpeg','png']"
+          :max-size="2048"
+          ref="resourceCoverUpload"
         >
           <Button type="ghost" icon="ios-cloud-upload-outline">上传</Button>
         </Upload>
@@ -39,7 +42,8 @@
           multiple
           action="//127.0.0.1:8088/upload/"
           :on-success="handleSuccess"
-          v-show="uploadVisible">
+          v-show="uploadVisible"
+          ref="resourceUpload">
           <Button type="ghost" icon="ios-cloud-upload-outline">上传</Button>
         </Upload>
         </Col>
@@ -102,6 +106,8 @@
         this.form.name = ''
         this.form.coverUrl = ''
         this.form.categoryId = 0
+        this.$refs.resourceCoverUpload.clearFiles()
+        this.$refs.resourceUpload.clearFiles()
         if (id && id !== 0) {
           this.form.id = id
           this.getResource()

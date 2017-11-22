@@ -3,7 +3,10 @@
     <div>
       <Table stripe :columns="columns" :data="expandKnowledges"></Table>
     </div>
-    <div style="margin-top: 30px">
+    <div style="float: right;margin: 10px;overflow: hidden">
+      <Page :total="total" :current="page" :page-size="per" @on-change="listExpandKnowledge" show-total></Page>
+    </div>
+    <div style="margin-top: 30px;margin-bottom: 10px">
       <Button type="primary" @click="showEdit()">新增拓展知识</Button>
     </div>
     <Edit ref="edit" @update="listExpandKnowledge"></Edit>
@@ -24,7 +27,7 @@
         loading: false,
         expandKnowledges: [],
         total: 0,
-        per: 10,
+        per: 3,
         page: 1,
         columns: [
           {
@@ -108,11 +111,11 @@
     },
     methods: {
       listExpandKnowledge: function (page) {
-        page = this.page - 1
+        this.page = page - 1
         this.$http.get('/api/admin/expand_knowledge/list', {
           params: {
             size: this.per,
-            page: page
+            page: this.page
           }
         }).then((response) => {
           this.loading = false

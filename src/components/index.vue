@@ -35,14 +35,15 @@
   }
 
   .layout-logo-left{
-    width: 90%;
-    height: 30px;
-    /*background: #5b6270;*/
+    width: 100%;
+    height: 56px;
+    background: #363e4f;
     color: #fff;
     border-radius: 3px;
-    margin: 15px auto;
     text-align: center;
     vertical-align: middle;
+    padding-top: 3px;
+    margin-bottom: 10px;
   }
 
   .logout {
@@ -86,7 +87,9 @@
       <Col :span="spanLeft" class="layout-menu-left">
         <Menu @on-select="menuSelect" :active-name="active" width="auto" :open-names="['1','3','7']"  theme="dark">
           <div class="layout-logo-left">
-              <h3 style="padding-top: 5px">Java学习网后台</h3>
+              <!--<h3 style="padding-top: 5px">Java学习网后台</h3>-->
+            <img  src="/static/img/logo.png" style="border-radius: 30px" width="180px" height="48">
+
           </div>
           <Submenu name="1" v-show="systemVisible" theme="dark">
             <template slot="title">
@@ -134,7 +137,7 @@
               <Icon type="social-codepen"></Icon>
               <span class="layout-text">在线测试管理</span>
             </template>
-            <Menu-item name="7-1" class="layout-text">
+            <Menu-item name="7-1" class="layout-text"  v-show="systemVisible">
               <Icon type="ios-information"></Icon>
               <span class="layout-text">题目类别管理</span>
             </Menu-item>
@@ -160,7 +163,7 @@
               <!--</Button>-->
             </Col>
             <Col span="4">
-            <img src="/static/img/java.jpg" height="50px">
+            <!--<img src="/static/img/java.jpg" height="50px">-->
             </Col>
           </Row>
         </div>

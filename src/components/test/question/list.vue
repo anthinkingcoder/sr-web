@@ -78,6 +78,17 @@
             key: 'questionCategoryId'
           },
           {
+            title: '题型',
+            key: 'answerCategory',
+            render: (h, param) => {
+              if (param.row.answerCategory === 1) {
+                return '单选'
+              } else {
+                return '多选'
+              }
+            }
+          },
+          {
             title: '操作',
             render: (h, params) => {
               return h('div', [

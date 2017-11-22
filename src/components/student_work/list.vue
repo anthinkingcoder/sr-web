@@ -14,7 +14,7 @@
         <div style="margin-top: 10px">加载中</div>
       </Spin>
     </Modal>
-    <div style="float: left;margin-top: 30px">
+    <div style="float: left;margin-top: 30px;margin-bottom: 10px">
       <Button type="primary" @click="showEdit()">新增学生作品</Button>
     </div>
     <Edit ref="edit" @update="listStudentWork"></Edit>
@@ -66,6 +66,21 @@
           {
             title: '作者',
             key: 'author'
+          },
+          {
+            title: '封面图',
+            key: 'coverUrl',
+            render: (h, params) => {
+              return h('img', {
+                attrs: {
+                  src: params.row.coverUrl,
+                  width: 100,
+                  height: 100
+                },
+                styls: {
+                }
+              }, '1231231231123')
+            }
           },
           {
             title: '摘要',

@@ -11,6 +11,20 @@
       <Form-item label="作者">
         <Input v-model="form.author" placeholder="请输入作者名称,多个以,分隔"/>
       </Form-item>
+      <Form-item label="封面">
+        <Col span="6">
+        <Upload
+          multiple
+          action="//127.0.0.1:8088/upload/"
+          :on-success="handleCoverSuccess"
+        >
+          <Button type="ghost" icon="ios-cloud-upload-outline">上传</Button>
+        </Upload>
+        </Col>
+        <Col span="12">
+        <img :src="form.coverUrl" style="max-height: 200px;max-width: 300px">
+        </Col>
+      </Form-item>
       <Form-item label="摘要">
         <Input v-model="form.summary" type="textarea" placeholder="请输入作品摘要"/>
       </Form-item>
@@ -44,7 +58,8 @@
           author: '',
           summary: '',
           content: '',
-          category: 0
+          category: 0,
+          coverUrl: ''
         },
         visible: false,
         loading: false,
@@ -80,12 +95,16 @@
         this.form.content = ''
         this.form.category = 0
         this.form.id = ''
+        this.form.coverUrl = ''
         if (id && id !== 0) {
           this.form.id = id
           this.getStudentWork()
         } else {
           this.form.id = 0
         }
+      },
+      handleCoverSuccess: function (res, file) {
+        this.form.coverUrl = res
       },
       submit: function () {
         this.form.content = this.$refs.ueditor.getContent()
@@ -100,7 +119,8 @@
           author: this.form.author,
           summary: this.form.summary,
           content: this.form.content,
-          category: this.form.category
+          category: this.form.category,
+          coverUrl: this.form.coverUrl
         })).then((response) => {
           this.loading = false
           let result = response.data
@@ -131,7 +151,8 @@
               summary: data.summary,
               author: data.author,
               content: data.content,
-              category: data.category
+              category: data.category,
+              coverUrl: data.coverUrl
             }
           } else {
             this.$Message.error(data.errorMsg)

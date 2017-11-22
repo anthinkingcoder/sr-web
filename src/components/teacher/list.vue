@@ -14,7 +14,7 @@
         <div style="margin-top: 10px">加载中</div>
       </Spin>
     </Modal>
-    <div style="float: left;margin-top: 30px">
+    <div style="float: left;margin-top: 30px;margin-bottom: 10px">
       <Button type="primary" @click="showEdit()">新增教师</Button>
     </div>
     <Edit ref="edit" @update="listTeacher"></Edit>

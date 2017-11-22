@@ -186,13 +186,12 @@
         })).then((response) => {
           this.loading = false
           let result = response.data
-          let data = result.data
           if (result.code === 666) {
             this.visible = false
             this.$emit('update', 1)
             this.$Message.success('成功')
           } else {
-            this.$Message.error(data.msg)
+            this.$Message.error(result.msg)
           }
         }).catch(() => {
           this.$Message.error('服务器错误,请重试')

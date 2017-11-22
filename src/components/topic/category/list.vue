@@ -45,20 +45,20 @@
             title: '操作',
             render: (h, params) => {
               return h('div', [
-                h('Button', {
-                  props: {
-                    type: 'primary',
-                    size: 'small'
-                  },
-                  style: {
-                    marginRight: '5px'
-                  },
-                  on: {
-                    click: () => {
-                      this.remove(params.row.id)
-                    }
-                  }
-                }, '禁用'),
+//                h('Button', {
+//                  props: {
+//                    type: 'primary',
+//                    size: 'small'
+//                  },
+//                  style: {
+//                    marginRight: '5px'
+//                  },
+//                  on: {
+//                    click: () => {
+//                      this.remove(params.row.id)
+//                    }
+//                  }
+//                }, ''),
                 h('Button', {
                   props: {
                     type: 'primary',

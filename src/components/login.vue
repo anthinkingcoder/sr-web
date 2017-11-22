@@ -1,15 +1,28 @@
 <template>
   <div class="login">
     <div class="panel">
-      <h2><Avatar src="/static/img/java.jpg" size="large" /></h2>
-      <Input v-model="username" placeholder="用户名" style="width: 402px;" size="large"  @on-enter="login">
+      <h2>
+          <img  src="/static/img/logo.png" style="border-radius: 30px" width="180px" height="48px">
+      </h2>
+      <Input v-model="username" placeholder="用户名" style="width: 320px;" size="large"  @on-enter="login">
       </Input>
       <Input type="password" v-model="password" placeholder="密码"
-             style="margin-top: 20px;width: 402px" size="large" @on-enter="login">
+             style="margin-top: 20px;width: 320px" size="large" @on-enter="login">
       </Input>
-      <Button class="loginBtn" type="primary" :loading="loading" shape="circle" size="large" @click="login"
-              style="width: 400px;height: 48px;margin-top: 30px;background-color: #495060;border-color:#495060">
-        <span v-if="!loading">登录</span>
+      <div style="margin-top: 20px;width: 320px">
+        <Row :gutter="8">
+          <Col span="16">
+          <Input type="text" v-model="captcha" placeholder="验证码" @on-enter="login">
+          </Input>
+          </Col>
+          <Col span="8">
+          <img :src="captchaPath" style="width: 100%;height: 32px;border-radius: 4px"  @click="getCaptcha">
+          </Col>
+        </Row>
+      </div>
+      <Button class="loginBtn" type="text" :loading="loading" shape="circle" size="large" @click="login"
+              style="width: 400px;height: 48px;margin-top: 30px">
+        <Icon type="log-in" size="48"></Icon>
       </Button>
     </div>
   </div>
@@ -25,19 +38,26 @@
       return {
         username: '',
         password: '',
-        loading: false
+        loading: false,
+        captcha: '',
+        captchaPath: 'http://localhost:8081/api/admin/captcha'
       }
     },
     methods: {
+      getCaptcha () {
+        console.info('dasdas')
+        this.captchaPath = '/api/admin/captcha' + '?key=' + Math.random()
+      },
       login () {
         if (!this.username || !this.password) {
           this.$Message.error('请输入账号和密码')
           return
         }
-        this.loading = true
+//        this.loading = true
         this.$http.post('/api/admin/login', qs.stringify({
           password: this.password,
-          username: this.username
+          username: this.username,
+          captcha: this.captcha
         })).then((response) => {
           this.loading = false
           let res = response.data
@@ -45,10 +65,14 @@
             this.$router.push({
               path: '/admin/main'
             })
+          } else {
+            this.$Message.error(res.msg)
+            this.getCaptcha()
           }
         }).catch(() => {
           this.loading = false
           this.$Message.error('登陆失败，请稍候再试')
+          this.getCaptcha()
         })
       },
       getUser () {
@@ -73,7 +97,7 @@
   .ivu-input-large
     font-size 14px;
     padding 6px 7px;
-    height 48px;
+    height 36px;
 
   .ivu-avatar-large
     width 80px
@@ -87,7 +111,8 @@
     align-items center
     background-size cover
     height 100%
-    background-image url("../../static/img/background.jpg")
+    background-color #363e4f
+    /*background-image url("../../static/img/background.jpg")*/
     .panel
       margin-top -60px
       display flex
@@ -102,8 +127,8 @@
         margin-top 30px
         margin-bottom 20px
         font-size 25px
-        font-weight 400
-        color: #323a45
+        font-weight 600
+        color: #ffffff
       .loginBtn
         font-size 24px
         font-weight 400
